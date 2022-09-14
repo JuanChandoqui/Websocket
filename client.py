@@ -7,22 +7,20 @@ class Client:
         self.HOST = HOST
         self.PORT = PORT
         self.HEADER = HEADER
-    
-    # HOST = "127.0.0.1"    #SERVER IP
-    # PORT = 4321           #SENDING PORT
-    # HEADER = 10
+        self.startConnection()
 
     def startConnection(self):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((self.HOST, self.PORT))
-            names =  [100, 'MARIA', 'JUAN', '', 'RODRIGO']
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((self.HOST, self.PORT))
 
-            dataSerial = pickle.dumps(names)
-            data_len = str(len(dataSerial))
-            
-            data = bytes(f'{data_len:<{self.HEADER}}', 'utf-8') + dataSerial
-            print(data)
-            s.send(data)
-            time.sleep(1)
+    def sendMessage(self):
+        names =  [100, 'MARIA', 'JUAN', '', 'RODRIGO']   
+        dataSerial = pickle.dumps(names)
+        data_len = str(len(dataSerial))
 
+        data = bytes(f'{data_len:<{self.HEADER}}', 'utf-8') + dataSerial
+        print(data)
+        self.s.send(data)
+        time.sleep(1)
+        self.s.close()
         print('CLOSE CONNECTION')

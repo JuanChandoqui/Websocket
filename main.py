@@ -5,6 +5,6 @@ if __name__ == "__main__":
     PORT = 4321 #LISTENING PORT
     HEADER = 10
     server = Server(HOST, PORT, HEADER)
-
     print('START SERVER')
     server.initializeServer()
+

@@ -22,5 +22,8 @@ class Client:
         print(data)
         self.s.send(data)
         time.sleep(1)
+        
+    def closeSocket(self):
         self.s.close()
         print('CLOSE CONNECTION')
+        
